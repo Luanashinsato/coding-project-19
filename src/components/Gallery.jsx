@@ -10,7 +10,7 @@ const Gallery = ({ tours, setTours, onRemove }) => {
     const fetchTours = async () => {
         try {
             setLoading(true); // Setting loading state to true before fetching data
-            const response = await fetch('https://course-api.com/react-tours-project'); // Fetching data from the API
+            const response = await fetch('https://www.course-api.com/react-tours-project'); // Fetching data from the API
             if (!response.ok) { // Checking if the response is ok
                 throw new Error('Network response was not ok');
             }
