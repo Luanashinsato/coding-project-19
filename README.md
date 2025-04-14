@@ -1,0 +1,2 @@
+# Coding Project 19 
+In this coding challenge, I developed a Tour Comparison App where I fetched data from an API, managed dynamic UI, used keys for efficient list rendering, passed data and callbacks through props, implemented controlled components, structured and lifted state, and rendered UI elements conditionally to enable interactive comparisons.
