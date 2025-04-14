@@ -1,4 +1,4 @@
-import React, { use, useEffect } from 'react'; // Importing React and useEffect from React
+import React, { useEffect, useState } from 'react'; // Importing React and useEffect from React
 import TourCard from './TourCard'; // Importing the Tour component
 
 const Gallery = ({ tours, setTours, onRemove }) => {
@@ -9,52 +9,57 @@ const Gallery = ({ tours, setTours, onRemove }) => {
     // Function to fetch tours from the API
     const fetchTours = async () => {
         try {
+            setLoading(true); // Setting loading state to true before fetching data
             const response = await fetch('https://course-api.com/react-tours-project'); // Fetching data from the API
             if (!response.ok) { // Checking if the response is ok
                 throw new Error('Network response was not ok');
             }
             const data = await response.json(); // Parsing the JSON data
+            setTours(data); // Setting the tours state with the fetched data
         } catch (error) {
             console.error('Error fetching tours:', error); // Logging the error
             setError(true); // Setting error state to true if there is an error
+            setLoading(false); 
         } finally {
-            setLoading(false); // Setting loading state to false after fetching data
-        }
-    }
-}
+            setLoading(false); 
+        };
+    };
 
-// Calling the fetchTours function to fetch tours
-useEffect(() => {
-    fetchTours(); 
-}, []);
+    // Calling the fetchTours function to fetch tours
+    useEffect(() => {
+        fetchTours(); 
+    }, []); 
 
-// Rendering loading state 
-if (loading) {
-    return <h2>Loading...</h2>; 
-};
+    // Rendering loading state 
+    if (loading) {
+        return <h2>Loading...</h2>; 
+    };
 
-// Rendering error state
-if (error) {
-    return <h2>Error occurred while fetching tours</h2>; 
-};
+    // Rendering error state
+    if (error) {
+        return <h2>Error occurred while fetching tours</h2>; 
+    };
 
-// Rendering if there are no tours
-if (tours.length === 0) {
-    return <h2>No tours available</h2>; 
-    <button onClick={fetchTours}>Refresh</button>
+    // Rendering if there are no tours
+    if (tours.length === 0) {
+        return (
+            <div className="no-tours">
+                <h2>No Tours Available</h2>
+                <button onClick={fetchTours}>Refresh</button>
+            </div>
+        );
+    };
 
     // Rendering the list of tours
     return (
         <section className='gallery'>
-            {tours.map((tour) => {
-                return (
-                    <TourCard 
-                        key={tour.id} // Unique key for each tour
-                        {...tour} // Spreading the tour object properties
-                        onRemove={onRemove} // Passing the onRemove function as a prop
-                        /> 
-                );
-            })}
+            {tours.map((tour) => (
+                <TourCard 
+                    key={tour.id} // Unique key for each tour
+                    {...tour} // Spreading the tour object properties
+                    onRemove={onRemove} // Passing the onRemove function as a prop
+                /> 
+            ))}
         </section>
     );
 };

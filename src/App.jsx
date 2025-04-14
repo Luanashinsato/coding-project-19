@@ -1,7 +1,7 @@
 // Task 1: Creating the root component of the app 
-import { useState } from 'react'; // Importing useState from React
+import React, { useState } from 'react'; // Importing useState from React
 import Gallery from './components/Gallery'; // Importing the Gallery component
-import './styles/styles.css' // Importing the CSS file for styling
+import './styles/styles.css'; // Importing the CSS file for styling
 
 // Root component of the app
 function App() {
@@ -18,7 +18,7 @@ function App() {
       <h1>Our Tours</h1> {/* Main heading of the app */}
       <Gallery tours={tours} setTours={setTours} onRemove={removeTour} /> {/* Gallery component to display the tours */} 
     </main>
-  )
-}
+  );
+};
 
 export default App; // Exporting the App component 
