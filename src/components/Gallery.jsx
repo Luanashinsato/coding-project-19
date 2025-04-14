@@ -25,6 +25,7 @@ const Gallery = ({ tours, setTours, onRemove }) => {
         };
     };
 
+    // Task 4: Handle loading and error states gracefully
     // Calling the fetchTours function to fetch tours
     useEffect(() => {
         fetchTours(); 
